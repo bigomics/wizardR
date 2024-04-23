@@ -131,7 +131,6 @@ $.extend(wizard, {
           title = "Step " + $(steps[next]).data("step");
         }
 
-        $(el).attr("data-title", title);
         $(el).attr("data-step-id", step_id);
 
         callback(false);
@@ -155,19 +154,9 @@ $.extend(wizard, {
 
         $(steps[current]).trigger("hidden");
         $(steps[next]).trigger("shown");
-        
 
-        // get data-title for next step
-        var title = $(steps[next]).data("title");
         var step_id = $(steps[next]).data("step-id");
 
-        // if title is undefined, set it to "Step n"
-        title = title || null;
-        if (title === null) {
-          title = "Step " + $(steps[next]).data("step");
-        }
-
-        $(el).attr("data-title", title);
         $(el).attr("data-step-id", step_id);
 
         callback(false);
@@ -197,13 +186,6 @@ $.extend(wizard, {
       // return title to first step
       var steps = $(el).find(".wizard-content .wizard-step");
       var step_id = $(steps[0]).data("step-id");
-
-      var title = $(steps[0]).data("title");
-      title = title || null;
-      if (title === null) {
-        title = "Step " + $(steps[0]).data("step");
-      }
-      $(el).attr("data-title", title);
       
       $(el).attr("data-step-id", step_id);
 
