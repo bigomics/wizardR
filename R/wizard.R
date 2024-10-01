@@ -120,7 +120,6 @@ wizard <- function(
 
   if (length(steps) > 0) {
     # get data-title with htmltools::htmlAttributes
-
     first_step_title <- htmltools::tagGetAttribute(steps[[1]], "data-title")
 
     first_step_title <- ifelse(is.null(first_step_title), "Step 0", first_step_title)
@@ -204,17 +203,28 @@ wizard_step <- function(
   ...,
   step_title = NULL,
   step_id = NULL,
+  server = FALSE,
   session = shiny::getDefaultReactiveDomain()) {
   
   if (is.null(step_id)) {
     stop("Step id must be provided")
   }
 
-  htmltools::div(
-    ...,
-    class = "wizard-step",
-    "data-title" = step_title,
-    "data-step-id" = step_id,
-    session = session
-  )
+  if (server) {
+    htmltools::div(
+      ...,
+      class = "wizard-step",
+      "data-title" = step_title,
+      "data-step-id" = step_id
+    )
+  } else {
+    htmltools::div(
+      ...,
+      class = "wizard-step",
+      "data-title" = step_title,
+      "data-step-id" = step_id,
+      session = session
+    )
+  }
+
 }
